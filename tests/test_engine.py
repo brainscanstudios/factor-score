@@ -60,7 +60,7 @@ class TestFactorEngineScore:
     def test_tickers_are_uppercased(self):
         provider = StubProvider({"NVDA": _uptrend()})
         engine = FactorEngine(provider=provider)
-        results = engine.score(["schd"])
+        results = engine.score(["nvda"])
         assert results[0].ticker == "NVDA"
 
     def test_empty_history_ticker_is_skipped(self):
