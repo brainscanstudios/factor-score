@@ -29,23 +29,23 @@ def _downtrend(n: int = 252, start: float = 130.0, slope: float = -0.3) -> list[
 
 class TestFactorEngineScore:
     def test_returns_list_of_factor_scores(self):
-        provider = StubProvider({"SCHD": _uptrend(), "VGT": _downtrend()})
+        provider = StubProvider({"NVDA": _uptrend(), "MSFT": _downtrend()})
         engine = FactorEngine(provider=provider)
-        results = engine.score(["SCHD", "VGT"])
+        results = engine.score(["NVDA", "MSFT"])
         assert len(results) == 2
         assert all(isinstance(r, FactorScore) for r in results)
 
     def test_sorted_descending_by_composite(self):
-        provider = StubProvider({"SCHD": _uptrend(), "VGT": _downtrend()})
+        provider = StubProvider({"NVDA": _uptrend(), "MSFT": _downtrend()})
         engine = FactorEngine(provider=provider)
-        results = engine.score(["SCHD", "VGT"])
+        results = engine.score(["NVDA", "MSFT"])
         scores = [r.composite_score for r in results]
         assert scores == sorted(scores, reverse=True)
 
     def test_single_ticker_returns_raw_only(self):
-        provider = StubProvider({"SCHD": _uptrend()})
+        provider = StubProvider({"NVDA": _uptrend()})
         engine = FactorEngine(provider=provider)
-        results = engine.score("SCHD")
+        results = engine.score("NVDA")
         assert len(results) == 1
         assert results[0].composite_score is None
         assert results[0].composite_rank is None
@@ -58,15 +58,15 @@ class TestFactorEngineScore:
         assert results[0].ticker == "UP"
 
     def test_tickers_are_uppercased(self):
-        provider = StubProvider({"SCHD": _uptrend()})
+        provider = StubProvider({"NVDA": _uptrend()})
         engine = FactorEngine(provider=provider)
         results = engine.score(["schd"])
-        assert results[0].ticker == "SCHD"
+        assert results[0].ticker == "NVDA"
 
     def test_empty_history_ticker_is_skipped(self):
-        provider = StubProvider({"SCHD": _uptrend(), "GHOST": []})
+        provider = StubProvider({"NVDA": _uptrend(), "GHOST": []})
         engine = FactorEngine(provider=provider)
-        results = engine.score(["SCHD", "GHOST"])
+        results = engine.score(["NVDA", "GHOST"])
         tickers = [r.ticker for r in results]
         assert "GHOST" not in tickers
 

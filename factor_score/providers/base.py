@@ -18,7 +18,7 @@ class DataProvider(Protocol):
         Parameters
         ----------
         ticker : str
-            Ticker symbol (e.g. "SCHD").
+            Ticker symbol (e.g. "NVDA").
         period : str
             Lookback window (e.g. "1y", "2y"). Interpretation is provider-defined.
 

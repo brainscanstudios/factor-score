@@ -23,9 +23,9 @@ class FactorEngine:
     --------
     >>> from factor_score import FactorEngine
     >>> engine = FactorEngine()
-    >>> scores = engine.score(["SCHD", "VGT", "XLE", "HDEF"])
+    >>> scores = engine.score(["DIS", "NVDA", "MSFT", "META"])
     >>> scores[0].ticker, scores[0].composite_score
-    ('VGT', 0.83)
+    ('NVDA', 0.83)
     """
 
     def __init__(
