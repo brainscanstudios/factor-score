@@ -6,7 +6,7 @@ Quantitative factor scoring for equities and ETFs.
 from factor_score import FactorEngine
 
 engine = FactorEngine()
-scores = engine.score(["SCHD", "VGT", "XLE", "HDEF"])
+scores = engine.score(["DIS", "NVDA", "MSFT", "META"])
 for s in scores:
     print(f"{s.ticker:6}  composite={s.composite_score:.2f}  rank=#{s.composite_rank}")
 ```
