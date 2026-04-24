@@ -62,6 +62,63 @@ class MyProvider:
 engine = FactorEngine(provider=MyProvider())
 ```
 
+## Contributing
+
+### Local development setup
+
+**Prerequisites:** Python 3.11 or 3.12, and [pip](https://pip.pypa.io/).
+
+1. Clone the repo and create a virtual environment:
+
+```bash
+git clone https://github.com/brainscanstudios/factor-score.git
+cd factor-score
+python -m venv .venv
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
+```
+
+2. Install the package in editable mode with dev dependencies:
+
+```bash
+pip install -e '.[dev]'
+```
+
+This installs `pytest`, `pytest-cov`, and the `yfinance` provider so the full test suite can run.
+
+### Running tests
+
+```bash
+pytest
+```
+
+To see coverage:
+
+```bash
+pytest --cov=factor_score
+```
+
+### Project layout
+
+```
+factor_score/      # library source
+  engine.py        # FactorEngine — main entry point
+  models.py        # FactorConfig, FactorScore dataclasses
+  factors/         # individual factor implementations
+  providers/       # DataProvider implementations (yfinance, …)
+tests/             # pytest suite
+```
+
+### Adding a factor
+
+1. Implement the scoring logic in `factor_score/factors/`.
+2. Add a weight field to `FactorConfig` in `models.py` (default to `0.0` so existing configs stay valid).
+3. Wire it into `FactorEngine.score()` in `engine.py`.
+4. Add tests in `tests/`.
+
+### Adding a data provider
+
+Implement the two-method `DataProvider` protocol (see `factor_score/providers/`) and pass an instance to `FactorEngine(provider=...)`. No base class required — duck typing is sufficient.
+
 ## License
 
 MIT
