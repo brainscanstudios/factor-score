@@ -1,5 +1,5 @@
 [build-system]
-requires = ["hatchling"]
+requires = ["hatchling>=1.22"]
 build-backend = "hatchling.build"
 
 [project]
@@ -8,7 +8,11 @@ version = "0.1.0"
 description = "Quantitative factor scoring for equities and ETFs"
 readme = "README.md"
 requires-python = ">=3.11"
-license = {text = "MIT"}
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+    { name = "Brain Scan Studios", email = "bkirsten@brainscanstudios.com" },
+]
 keywords = ["finance", "quant", "factor", "etf", "momentum", "portfolio"]
 classifiers = [
     "Development Status :: 3 - Alpha",
@@ -16,6 +20,7 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
     "Topic :: Office/Business :: Financial :: Investment",
 ]
 dependencies = [
@@ -36,7 +41,7 @@ Repository = "https://github.com/brainscanstudios/factor-score"
 Issues = "https://github.com/brainscanstudios/factor-score/issues"
 
 [tool.hatch.build.targets.wheel]
-packages = ["factor_score"]
+packages = ["src/factor_score"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
